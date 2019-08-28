@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <header>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Welcome to BIT</title>
+            <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+            <script src="index.js"></script>
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </header>
+    <body id="body"></body>
+        <nav class="grey-bg header" style="width:100%,height=70px;" id="navbar" onclick="openForm(this.id)">
+                <a href="index.html"><img class="logo" src="images/BITLogoLone.png" alt="BIT LOGO" height="70px" style="margin-left:10px;"/></a>
+        </nav>
+        <p class="login orange-fore" id="login" onclick="openForm(this.id)">LOGIN</p>
+        <div id="formWrapper">
+            <form>
+                <label id="usernameLabel" for="username"><b>Username</b></label>
+                <input class="loginBoxes" type="text" placeholder="Enter Username" name="username" required>
+            
+                <label for="password"><b>Password</b></label>
+                <input class="loginBoxes" type="password" placeholder="Enter Password" name="password" required>
+            
+                <button class="loginButton" type="submit">Login</button>
+                <label style="font-weight:normal;"><input type="checkbox" checked="checked" name="remember">Remember me</label><br/>
+            </form>
+        </div>
+        <section id="section" onclick="openForm(this.id)">
+
+        </section>
+        <footer id="footer" onclick="openForm(this.id)">
+
+        </footer>
+    </body>
+    
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to BIT</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css">
+    <script src="index.js"></script>
+</head>
+<body >
+    <header>
+        <div id="headerContainer">
+            <div id="headerWrapper">
+                <a href="index.html"><img id="headerLogo" src="images/BITLogoLone.png"></a>
+                <ul id="navBar">
+                    <li class="navList"><a href="index.html" class="navLinks">HOME</a></li>
+                    <li class="navList"><a href="about-us.html" class="navLinks">ABOUT US</a></li>
+                    <li class="navList"><a href="contact-us.html" class="navLinks">CONTACT US</a></li>
+                </ul>
+                <ul id="profileNavBar">
+                    <li id="profile" onclick="openProfileForm()">WELCOME [FIRSTNAME]!</li>
+                </ul>
+                <div id="profileWrapper">
+                        <button class="profileButton"><a href="" class="profileButton">Change Password</a></button>
+                        <button class="profileButton"><a href="" class="profileButton">Log out</a></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article id="loggedInArticle" onclick="closeForm()">
+        <div class="mainWrapper">
+            <div class="informationCard">
+                <div class="informationCardHeader">
+                <h1 class="informationCardH1">JOB STATUS</h1>
+                </div>
+                <table role="grid"  id="jobRequest">
+                    <tr id="jobRequestHeader">
+                        <th class="jobRequestHeader">Start Date</th>
+                        <th class="jobRequestHeader">JobID</th> 
+                        <th class="jobRequestHeader">BIT Contractor</th>
+                        <th>Description</th>
+                        <th class="jobRequestHeader">Job Category</th>
+                        <th class="jobRequestHeader">Status</th>
+                    </tr>
+                    <tr>
+                        <td>none</td>
+                        <td>none</td> 
+                        <td>none</td>
+                        <td>none</td>
+                        <td>none</td>
+                        <td>none</td>
+                    </tr>
+                    <tr>
+                        <td>none</td>
+                        <td>none</td> 
+                        <td>none</td>
+                        <td>none</td>
+                        <td>none</td>
+                        <td>none</td>
+                    </tr>
+                    <tr>
+                        <td>none</td>
+                        <td>none</td> 
+                        <td>none</td>
+                        <td>none</td>
+                        <td>none</td>
+                        <td>none</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="informationCard">
+                <div class="informationCardHeader">
+                    <h1 class="informationCardH1">JOB REQUEST</h1>
+                </div>
+                <form id="jobRequestForm">
+                    <label class="jobRequestLabel">Preferred Date: <input type="date"></label>
+                    <label class="jobRequestLabel">Job Category: <select name="jobCat">
+                        <option value="something">something</option>
+                        <option value="something">something</option>
+                        <option value="something">something</option>
+                        <option value="something">something</option>
+                    </select></label>
+                    <label class="jobRequestLabel">Branch: <input type="text"></label>
+                    <button type="submit">Send Request</button><br><br>
+                    <label id="jobRequestFormDescLabel">Description: </label><br>
+                    <input id="jobRequestFormDesc" type="text">
+                    
+                    
+                </form>   
+            </div>
+
+        </div>
+    </article>
+    <footer onclick="closeForm()">
+        <div id="footerWrapper">
+            <p>&copy; 2019 BIT - Business Information Technology</p>
+        </div>
+    </footer>
+</body>
+
+</html>

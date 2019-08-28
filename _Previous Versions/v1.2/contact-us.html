@@ -1,0 +1,52 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <header>
+        <div id="headerContainer">
+            <div id="headerWrapper">
+                <a href="index.html"><img id="headerLogo" src="images/BITLogoLone.png"></a>
+                <ul id="navBar">
+                    <li class="navList"><a href="index.html" class="navLinks">HOME</a></li>
+                    <li class="navList"><a href="about-us.html" class="navLinks">ABOUT US</a></li>
+                    <li class="navList"><a href="contact-us.html" class="navLinks">CONTACT US</a></li>
+                    <li id="login" onclick="openForm()">LOGIN</li>
+                </ul>
+                <div id="formWrapper">
+                    <form id="loginForm">
+                        <label id="usernameLabel" for="username"><b>Username</b></label>
+                        <input class="loginBoxes" type="text" placeholder="Enter Username" name="username" required>
+                    
+                        <label for="password"><b>Password</b></label>
+                        <input class="loginBoxes" type="password" placeholder="Enter Password" name="password" required>
+                    
+                        <button id="loginButton" type="submit">Login</button>
+                        <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me</label><br/>
+                        <a href="" id="forgotPassword">Forgot your password?</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="mainWrapper">
+            <h1>Address</h1>
+            <p>29 Street st</p>
+            <h1>Phone Number</h1>
+            <p>xxxx-xxx-xxx</p>
+        </div>
+    </article>
+    <footer>
+        <div id="footerWrapper">
+                <p>&copy; 2019 BIT - Business Information Technology</p>
+        </div>
+    </footer>
+</body>
+
+</html>

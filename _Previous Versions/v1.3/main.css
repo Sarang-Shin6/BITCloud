@@ -1,0 +1,94 @@
+
+.orange-fore {color: #f47840;}
+.blue-fore {color: #4b7885;}
+.grey-fore { color: #EBEEF2;}
+.orange-bg {background: #f47840;}
+.blue-bg {background: #4b7885;}
+.grey-bg {background: #EBEEF2}
+.blue-border {border: 2px solid #4b7885;}
+
+.header{
+    box-shadow: 0px 1px 10px #888888;
+    z-index: 10;
+    position: fixed;
+    height: 72px;
+    width: 100%;
+}
+
+.login{
+    float: right;
+    margin: 15px 10px 0 0;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px lightgray;
+    cursor: pointer;
+    position: relative;
+    z-index: 12;
+}
+
+.login:focus
+{
+    opacity: 0.5;
+    border: none;
+}
+.login:hover {
+    opacity: 0.5;
+}
+
+#formWrapper {
+    width: 350px;
+    height: 280px;
+    padding: 15px;
+    display: none;
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    top: 75px;
+    right: -70px;
+    border: 2px solid #888888;
+    background-color: rgb(235, 238, 242);
+    box-shadow: 0.5px 0.5px 5px #888888;
+    z-index: 11;
+    
+}
+
+form label, input {
+    font-family: 'century gothic', 'arial', 'sans-serif';
+    font-size: 10pt;
+}
+
+form input {
+    font-weight: lighter;
+}
+
+.loginBoxes {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid lightgray;
+    box-sizing: border-box;
+}
+
+.loginButton {
+    background-color: darkgray;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.loginButton:hover {
+    opacity: 0.8;
+}
+
+body {
+    min-height: 800px;
+}
+
+section {
+    min-height: 800px;
+}

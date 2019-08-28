@@ -1,0 +1,1073 @@
+drop database bitdb;
+create database bitdb;
+use bitdb;
+
+
+
+CREATE TABLE JobCategory (
+                JobCategoryID INT AUTO_INCREMENT NOT NULL,
+                Description VARCHAR(50) NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (JobCategoryID)
+);
+
+
+CREATE TABLE Status (
+                StatusID INT AUTO_INCREMENT NOT NULL,
+                Description VARCHAR(20) NOT NULL,
+                PRIMARY KEY (StatusID)
+);
+
+
+CREATE TABLE Client (
+                ClientID INT AUTO_INCREMENT NOT NULL,
+                FirstName VARCHAR(15) NOT NULL,
+                LastName VARCHAR(15) NOT NULL,
+                Phone VARCHAR(10) NOT NULL,
+                Email VARCHAR(30) NOT NULL,
+                Gender CHAR(1) NOT NULL,
+                Password VARCHAR(40) NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (ClientID)
+);
+
+
+CREATE TABLE Client_log (
+                ClientLogID INT AUTO_INCREMENT NOT NULL,
+                ClientID INT NOT NULL,
+                FirstName VARCHAR(15) NOT NULL,
+                LastName VARCHAR(15) NOT NULL,
+                Phone VARCHAR(10) NOT NULL,
+                Email VARCHAR(30) NOT NULL,
+                Password VARCHAR(40) NOT NULL,
+                Gender CHAR(1) NOT NULL,
+                Action CHAR(3) NOT NULL,
+                ChangeDate DATE NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (ClientLogID)
+);
+
+
+CREATE TABLE Location (
+                LocationID INT AUTO_INCREMENT NOT NULL,
+                City VARCHAR(10) NOT NULL,
+                Description VARCHAR(30) NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (LocationID)
+);
+
+
+CREATE TABLE Company (
+                CompanyID INT AUTO_INCREMENT NOT NULL,
+                Name VARCHAR(30) NOT NULL,
+                Street VARCHAR(20) NOT NULL,
+                Suburb VARCHAR(12) NOT NULL,
+                State VARCHAR(4) NOT NULL,
+                Postcode VARCHAR(4) NOT NULL,
+                Branch VARCHAR(20) NOT NULL,
+                Description VARCHAR(50) NOT NULL,
+                ClientID INT NOT NULL,
+                LocationID INT NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (CompanyID)
+);
+
+
+CREATE TABLE Company_log (
+                CompanyLogID INT AUTO_INCREMENT NOT NULL,
+                CompanyID INT NOT NULL,
+                Name VARCHAR(30) NOT NULL,
+                Street VARCHAR(20) NOT NULL,
+                Suburb VARCHAR(12) NOT NULL,
+                State VARCHAR(4) NOT NULL,
+                Postcode VARCHAR(4) NOT NULL,
+                Branch VARCHAR(20) NOT NULL,
+                Description VARCHAR(50) NOT NULL,
+                ClientID INT NOT NULL,
+                LocationID INT NOT NULL,
+                Action CHAR(3) NOT NULL,
+                ChangeDate DATE NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (CompanyLogID)
+);
+
+
+CREATE TABLE Staff (
+                StaffID INT AUTO_INCREMENT NOT NULL,
+                FirstName VARCHAR(15) NOT NULL,
+                LastName VARCHAR(15) NOT NULL,
+                Street VARCHAR(20) NOT NULL,
+                Suburb VARCHAR(12) NOT NULL,
+                State VARCHAR(4) NOT NULL,
+                Postcode VARCHAR(4) NOT NULL,
+                Email VARCHAR(30) NOT NULL,
+                Phone VARCHAR(10) NOT NULL,
+                AccName VARCHAR(30) NOT NULL,
+                AccBSB VARCHAR(6) NOT NULL,
+                AccNumber VARCHAR(9) NOT NULL,
+                Gender CHAR(1) NOT NULL,
+                Password VARCHAR(40) NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (StaffID)
+);
+
+
+CREATE TABLE Staff_log (
+                StaffLogID INT AUTO_INCREMENT NOT NULL,
+                StaffID INT NOT NULL,
+                FirstName VARCHAR(15) NOT NULL,
+                LastName VARCHAR(15) NOT NULL,
+                Street VARCHAR(20) NOT NULL,
+                Suburb VARCHAR(12) NOT NULL,
+                State VARCHAR(4) NOT NULL,
+                Postcode VARCHAR(4) NOT NULL,
+                Email VARCHAR(30) NOT NULL,
+                Phone VARCHAR(10) NOT NULL,
+                AccName VARCHAR(30) NOT NULL,
+                AccBSB VARCHAR(6) NOT NULL,
+                AccNumber VARCHAR(9) NOT NULL,
+                Gender CHAR(1) NOT NULL,
+                Password VARCHAR(40) NOT NULL,
+                Action CHAR(3) NOT NULL,
+                ChangeDate DATE NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (StaffLogID)
+);
+
+
+CREATE TABLE Coordinator (
+                CoordinatorID INT NOT NULL,
+                Admin TINYINT NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (CoordinatorID)
+);
+
+
+CREATE TABLE Contractor (
+                ContractorID INT NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (ContractorID)
+);
+
+
+CREATE TABLE ContractorAvailability (
+                ContractorAvailabilityID INT AUTO_INCREMENT NOT NULL,
+                Date DATE NOT NULL,
+                StartTime TIME NOT NULL,
+                Hours TINYINT NOT NULL,
+                ContractorID INT NOT NULL,
+		Active BIT NOT NULL,
+                PRIMARY KEY (ContractorAvailabilityID)
+);
+
+
+CREATE TABLE ContractorLocation (
+                ContractorLocationID INT AUTO_INCREMENT NOT NULL,
+                LocationID INT NOT NULL,
+                ContractorID INT NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (ContractorLocationID)
+);
+
+
+CREATE TABLE ContractorSkill (
+                ContractorSkillID INT AUTO_INCREMENT NOT NULL,
+                JobCategoryID INT NOT NULL,
+                ContractorID INT NOT NULL,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (ContractorSkillID)
+);
+
+
+CREATE TABLE Job (
+                JobID INT AUTO_INCREMENT NOT NULL,
+                CompanyID INT NOT NULL,
+                ClientID INT NOT NULL,
+                StatusID INT NOT NULL,
+                JobCategoryID INT NOT NULL,
+                StartDate DATE,
+                Duration INT,
+                PreferredEndDate DATE NOT NULL,
+                EstimatedDuration INT,
+                Description VARCHAR(100) NOT NULL,
+                Feedback VARCHAR(100),
+                LoggedKm INT,
+                JobRating TINYINT,
+                ContractorID INT,
+                CoordinatorID INT,
+                Active TINYINT NOT NULL,
+                PRIMARY KEY (JobID)
+);
+
+
+CREATE TABLE Job_log (
+                JobLogID INT AUTO_INCREMENT NOT NULL,
+                JobID INT NOT NULL,
+                CompanyID INT NOT NULL,
+                ClientID INT NOT NULL,
+                StatusID INT NOT NULL,
+                JobCategoryID INT NOT NULL,
+                StartDate DATE,
+                Duration INT,
+                PreferredEndDate DATE NOT NULL,
+                EstimatedDuration INT,
+                Description VARCHAR(100) NOT NULL,
+                Feedback VARCHAR(100),
+                LoggedKm INT,
+                JobRating TINYINT,
+                ContractorID INT,
+                CoordinatorID INT,
+		Active TINYINT NOT NULL,
+                Action CHAR(3) NOT NULL,
+                ChangeDate DATE NOT NULL,
+                PRIMARY KEY (JobLogID)
+);
+
+CREATE TABLE JobRejection (
+                JobRejectionID INT AUTO_INCREMENT NOT NULL,
+                ContractorID INT NOT NULL,
+                JobID INT NOT NULL,
+                PRIMARY KEY (JobRejectionID)
+);
+
+
+ALTER TABLE Job ADD CONSTRAINT jobcategory_job_fk
+FOREIGN KEY (JobCategoryID)
+REFERENCES JobCategory (JobCategoryID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE ContractorSkill ADD CONSTRAINT jobcategory_conctractorskill_fk
+FOREIGN KEY (JobCategoryID)
+REFERENCES JobCategory (JobCategoryID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Job ADD CONSTRAINT status_job_fk
+FOREIGN KEY (StatusID)
+REFERENCES Status (StatusID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Job ADD CONSTRAINT client_job_fk
+FOREIGN KEY (ClientID)
+REFERENCES Client (ClientID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Company ADD CONSTRAINT client_company_fk
+FOREIGN KEY (ClientID)
+REFERENCES Client (ClientID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Client_log ADD CONSTRAINT client_client_log_fk
+FOREIGN KEY (ClientID)
+REFERENCES Client (ClientID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Company ADD CONSTRAINT location_company_fk
+FOREIGN KEY (LocationID)
+REFERENCES Location (LocationID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE ContractorLocation ADD CONSTRAINT location_contractorlocation_fk
+FOREIGN KEY (LocationID)
+REFERENCES Location (LocationID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Job ADD CONSTRAINT company_job_fk
+FOREIGN KEY (CompanyID)
+REFERENCES Company (CompanyID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Company_log ADD CONSTRAINT company_company_log_fk
+FOREIGN KEY (CompanyID)
+REFERENCES Company (CompanyID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Contractor ADD CONSTRAINT staff_contractor_fk
+FOREIGN KEY (ContractorID)
+REFERENCES Staff (StaffID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Coordinator ADD CONSTRAINT staff_coordinator_fk
+FOREIGN KEY (CoordinatorID)
+REFERENCES Staff (StaffID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Staff_log ADD CONSTRAINT staff_staff_log_fk
+FOREIGN KEY (StaffID)
+REFERENCES Staff (StaffID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Job ADD CONSTRAINT coordinator_job_fk
+FOREIGN KEY (CoordinatorID)
+REFERENCES Coordinator (CoordinatorID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Job ADD CONSTRAINT contractor_job_fk
+FOREIGN KEY (ContractorID)
+REFERENCES Contractor (ContractorID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE ContractorSkill ADD CONSTRAINT contractor_contractorskill_fk
+FOREIGN KEY (ContractorID)
+REFERENCES Contractor (ContractorID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE ContractorLocation ADD CONSTRAINT contractor_contractorlocation_fk
+FOREIGN KEY (ContractorID)
+REFERENCES Contractor (ContractorID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE JobRejection ADD CONSTRAINT contractor_jobrejection_fk
+FOREIGN KEY (ContractorID)
+REFERENCES Contractor (ContractorID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+
+ALTER TABLE ContractorAvailability ADD CONSTRAINT contractor_contractoravailability_fk
+FOREIGN KEY (ContractorID)
+REFERENCES Contractor (ContractorID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE JobRejection ADD CONSTRAINT job_jobrejection_fk
+FOREIGN KEY (JobID)
+REFERENCES Job (JobID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE Job_log ADD CONSTRAINT job_job_log_fk
+FOREIGN KEY (JobID)
+REFERENCES Job (JobID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+-- ----------------------------------------inserts--------------------------------------------------
+
+-- JOBCATEGORY --
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'Troubleshooting', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'H/W Maintenance', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'Auditing', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'H/W Installation', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'S/W Installation', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'S/W Maintenance', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'Consultation', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'Design', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'Programming', 1);
+INSERT INTO jobcategory (JobCategoryID, Description, Active) VALUES (NULL, 'Security', 1);
+
+-- Status --
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Requested');
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Assessed');
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Contractor Requested');
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Assigned');
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Commenced');
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Completed');
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Verified');
+INSERT INTO status (StatusID, Description) VALUES (NULL, 'Paid');
+
+-- Location --
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Blue Mountains', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'City', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Eastern Suburbs', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Forest District', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Western Sydney', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Inner West', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Northern Beaches', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'North Shore', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'South Eastern Suburbs', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Southern Suburbs', 'Sydney', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'Inner North', 'Melbourne', 1);
+INSERT INTO location (LocationID, Description, City, Active) VALUES (NULL, 'CBD', 'Melbourne', 1);
+
+-- Staff --
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Josh', 'Moss', '9 McPherson Rd', 'Manly', 'NSW', '2095', lower('Josh.Moss@Gmail.com'), '0420017599', 'Josh Moss', '082400', '748372', 'M', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Maddie', 'Bourne', '86 Ocean Rd', 'Hurstville', 'NSW', '2220', lower('Maddie.Bourne@gmail.com'), '0420091545', 'Maddie Bourne', '082409', '758463', 'F', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Cindy', 'Lowry', '3 Doris St', 'North Sydney', 'NSW', '2060', lower('Cindy.Lowry@gmail.com'), '0480806768', 'Cindy Lowry', '082410', '294657', 'F', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Doug', 'Mathews', '161 Sussex St', 'Sydney', 'NSW', '2000', lower('Doug.Mathews@gmail.com'), '0489840057', 'Doug Mathews', '082513', '574622', 'M', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Victoria', 'Prasser', '15 Young St', 'Hornsby', 'NSW', '2077', lower('Vic.Prasser@gmail.com'), '04829928820', 'Victoria Prasser', '082123', '435674', 'F', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Darius', 'May', '15 Wentworth Ave', 'Gosford', 'NSW', '2250', lower('Darius.May@gmail.com'), '0420146916', 'Darius May', '062005', '123678', 'M', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Isaiah', 'Mann', '67 Newtral St', 'Glebe', 'NSW', '2037', lower('Isaiah.Mann@gmail.com'), '0489953065', 'Isaiah Mann', '062000', '345672', 'M', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Kylie', 'Cornish', '4 Walker St', 'Bankstown', 'NSW', '2200', lower('Kylie.Cornish@gmail.com'), '0420113395', 'Kylie Cornish', '062009', '237537', 'F', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Asha', 'Nash', '72 Liberical St', 'Penrith', 'NSW', '2750', lower('Asha.Nash@gmail.com'), '0402021309', 'Asha Nash', '062113', '890453', 'M', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Bradley', 'Park', '2 Hampden St', 'Cronulla', 'NSW', '2230', lower('Bradley.Park@gmail.com'), '0419157605', 'Bradley Park', '062011', '437536', 'M', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Ben', 'Ireland', '88 Healy Rd', 'Hornsby', 'NSW', '2077', lower('Ben.Ireland@gmail.com'), '0420020203', 'Ben Ireland', '012950', '345224', 'M', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Bethany', 'Harper', '66 Ocean St', 'Hurstville', 'NSW', '2220', lower('Beth.Harper@gmail.com'), '0420107200', 'Bethany Harper', '012953', '556743', 'F', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Jessica', 'Masters', '33 Brown St', 'Wahroonga', 'NSW', '2076', lower('Jess.Masters@gmail.com'), '0419593505', 'Jessica Masters', '232001', '126555', 'F', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'Audrey', 'Curmi', '71 Seaview Ct', 'Strathfield', 'NSW', '2135', lower('Audrey.Curmi@gmail.com'), '0489974130', 'Audrey Curmi', '632000', '111583', 'F', SHA1('test'), 1);
+INSERT INTO staff (StaffID, FirstName, LastName, Street, Suburb, State, Postcode, Email, Phone, AccName, AccBSB, AccNumber, Gender, Password, Active) 
+VALUES (NULL, 'James', 'Pasco', '78 Cecil St', 'North Ryde', 'NSW', '2113', lower('James.Pasco@gmail.com'), '0488855277', 'James Pasco', '325185', '265747', 'M', SHA1('test'), 1);
+
+-- Contractor --
+INSERT INTO contractor (ContractorID, Active) VALUES (1, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (2, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (3, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (4, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (5, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (6, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (7, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (8, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (9, 1);
+INSERT INTO contractor (ContractorID, Active) VALUES (10, 1);
+
+-- Coordinator --
+INSERT INTO coordinator (CoordinatorID, Admin, Active) VALUES (11, 1, 1);
+INSERT INTO coordinator (CoordinatorID, Admin, Active) VALUES (12, 1, 1);
+INSERT INTO coordinator (CoordinatorID, Admin, Active) VALUES (13, 0, 1);
+INSERT INTO coordinator (CoordinatorID, Admin, Active) VALUES (14, 0, 1);
+INSERT INTO coordinator (CoordinatorID, Admin, Active) VALUES (15, 0, 1);
+
+-- Client --
+INSERT INTO client (ClientID, FirstName, LastName, Phone, Email, Gender, Password, Active) 
+VALUES (NULL, 'Mikayla', 'Lussen', '0420045098', lower('Mikayla.Lussen@BloomCareer.com'), 'F', SHA1('test'), 1);
+INSERT INTO client (ClientID, FirstName, LastName, Phone, Email, Gender, Password, Active) 
+VALUES (NULL, 'Jayden', 'Swadling', '0430536216', lower('Jayden.Swadling@Foodr.com'), 'M', SHA1('test'), 1);
+INSERT INTO client (ClientID, FirstName, LastName, Phone, Email, Gender, Password, Active) 
+VALUES (NULL, 'Eva', 'Douglas', '0489004510', lower('Eva.Douglas@NHealth.com'), 'F', SHA1('test'), 1);
+INSERT INTO client (ClientID, FirstName, LastName, Phone, Email, Gender, Password, Active) 
+VALUES (NULL, 'Stella', 'Kroemer', '0489905863', lower('Stella.Kroemer@Toony.com'), 'F', SHA1('test'), 1);
+INSERT INTO client (ClientID, FirstName, LastName, Phone, Email, Gender, Password, Active) 
+VALUES (NULL, 'Jeff', 'Puddy', '0420100484', lower('Jeff.Puddy@NHealth.com'), 'M', SHA1('test'), 1);
+
+-- Company --
+INSERT INTO company (CompanyID, Name, Street, Suburb, State, Postcode, Branch, Description, ClientID, LocationID, Active) 
+VALUES (NULL, 'Bloom Career', '26 Peats Ferry Rd', 'Hornsby', 'NSW', '2077', 'Hornsby', 'Employment Service', 1, 8, 1);
+INSERT INTO company (CompanyID, Name, Street, Suburb, State, Postcode, Branch, Description, ClientID, LocationID, Active) 
+VALUES (NULL, 'Bloom Career', '3 Archer St', 'Chatswood', 'NSW', '2067', 'Chatswood', 'Employment Service', 1, 8, 1);
+INSERT INTO company (CompanyID, Name, Street, Suburb, State, Postcode, Branch, Description, ClientID, LocationID, Active) 
+VALUES (NULL, 'Foodr', '44 Brown St', 'North Sydney', 'NSW', '2060', 'North Sydney', 'Nutrition', 2, 2, 1);
+INSERT INTO company (CompanyID, Name, Street, Suburb, State, Postcode, Branch, Description, ClientID, LocationID, Active) 
+VALUES (NULL, 'NHealth GP', '38 EdgeCliff Rd', 'Redfern', 'NSW', '2016', 'Redfern', 'General Practice', 3, 6, 1);
+INSERT INTO company (CompanyID, Name, Street, Suburb, State, Postcode, Branch, Description, ClientID, LocationID, Active) 
+VALUES (NULL, 'Toony', '77 Magnolia Dr', 'Hurstville', 'NSW', '2220', 'Hurstville', 'Startup Animation', 4, 10, 1);
+INSERT INTO company (CompanyID, Name, Street, Suburb, State, Postcode, Branch, Description, ClientID, LocationID, Active) 
+VALUES (NULL, 'Toony', '75 Pennisula Dr', 'Cronulla', 'NSW', '2230', 'Cronulla', 'Startup Animation', 4, 10, 1);
+INSERT INTO company (CompanyID, Name, Street, Suburb, State, Postcode, Branch, Description, ClientID, LocationID, Active) 
+VALUES (NULL, 'NHealth GP', '8 Queen St', 'Dee Why', 'NSW', '2099', 'Dee Why', 'General Practice', 5, 7, 1);
+
+-- ContractorSkill --
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 1, 10, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 1, 7, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 1, 6, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 1, 1, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 1, 5, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 2, 2, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 2, 10, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 2, 4, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 2, 8, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 2, 6, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 3, 2, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 3, 6, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 3, 3, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 3, 5, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 3, 7, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 4, 2, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 4, 6, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 4, 3, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 4, 5, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 4, 7, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 5, 8, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 5, 7, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 5, 4, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 5, 10, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 5, 2, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 6, 7, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 6, 9, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 6, 5, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 6, 1, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 6, 7, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 7, 6, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 7, 7, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 7, 10, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 7, 9, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 7, 4, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 8, 5, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 8, 8, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 8, 10, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 8, 1, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 8, 3, 1);
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 9, 3, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 9, 4, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 9, 6, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 9, 9, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 9, 2, 1);
+
+
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 10, 9, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 10, 10, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 10, 1, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 10, 4, 1);
+INSERT INTO contractorskill (ContractorSkillID, ContractorID, JobCategoryID, Active) VALUES (NULL, 10, 3, 1);
+
+
+
+
+
+-- ContractorLocation --
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 7, 1, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 10, 1, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 6, 1, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 1, 1, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 5, 1, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 2, 2, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 10, 2, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 4, 2, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 11, 2, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 12, 2, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 2, 3, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 6, 3, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 3, 3, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 5, 3, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 7, 3, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 11, 4, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 5, 4, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 1, 4, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 3, 4, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 8, 4, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 8, 5, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 7, 5, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 3, 5, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 11, 5, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 5, 5, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 7, 6, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 6, 1, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 5, 6, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 2, 6, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 9, 1, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 11, 7, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 6, 7, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 10, 7, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 5, 7, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 4, 7, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 7, 8, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 5, 8, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 8, 8, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 6, 8, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 4, 8, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 6, 9, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 3, 9, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 1, 9, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 2, 9, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 9, 9, 1);
+
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 9, 10, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 10, 10, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 1, 10, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 3, 10, 1);
+INSERT INTO contractorlocation (ContractorLocationID, LocationID, ContractorID, Active) VALUES (NULL, 8, 10, 1);
+
+
+
+
+
+
+-- Job --
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 7, 5, 8, 1, '2019-3-7', '7', '2019-7-30', 5, '5 Broken Computers', NULL, 25, 5, 6, 11, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 6, 4, 8, 2, '2019-3-7', '7', '2019-7-30', 5, 'Bad Server', NULL, 25, 5, 5, 11, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 3, 2, 8, 3, '2019-3-7', '7', '2019-7-30', 5, 'Internet not working', NULL, 25, 5, 1, 11, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 7, 5, 7, 4, '2019-3-17', '3', '2019-3-14', 2, 'Need an audit', NULL, 17, NULL, 1, 12, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 2, 1, 7, 5, '2019-3-17', '3', '2019-3-14', 2, 'Need to install software', NULL, 17, NULL, 4, 12, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 5, 4, 7, 6, '2019-3-17', '3', '2019-3-14', 2, 'Broken Printer', NULL, 17, NULL, 10, 12, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 4, 3, 7, 6, '2019-3-17', '3', '2019-3-14', 2, 'Broken Printer', NULL, 17, NULL, 10, 12, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 5, 4, 6, 7, '2019-3-21', '4', '2019-6-21', 5, 'Security Check', 'Very Fast Response', 20, NULL, 1, 13, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 3, 2, 6, 8, '2019-3-21', '4', '2019-6-21', 5, 'Can\'t connect to network', 'Very Fast Response', 20, NULL, 2, 13, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 2, 1, 6, 9, '2019-3-21', '4', '2019-6-21', 5, 'need server Maintenance', 'Very Fast Response', 20, NULL, 3, 13, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 5, 4, 5, 10, '2019-3-30', NULL, '2019-7-28', 13, 'Boss\' computer broke', NULL, NULL, NULL, 4, 14, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 7, 5, 5, 1, '2019-3-30', NULL, '2019-7-28', 13, 'Smashed Company Phone', NULL, NULL, NULL, 5, 14, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 1, 1, 5, 2, '2019-3-30', NULL, '2019-7-28', 13, 'Lost Admin Status', NULL, NULL, NULL, 6, 14, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 4, 3, 4, 3, NULL, NULL, '2019-7-4', 20, 'dead computer', NULL, NULL, NULL, 7, 15, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 2, 1, 4, 4, NULL, NULL, '2019-7-4', 20, 'Phone keeps restarting', NULL, NULL, NULL, 8, 15, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 6, 4, 4, 5, NULL, NULL, '2019-7-4', 20, 'not sure, will contact later', NULL, NULL, NULL, 9, 15, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 5, 4, 3, 6, NULL, NULL, '2019-7-11', 30, 'S/W Troubleshoot', NULL, NULL, NULL, 10, 11, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 3, 2, 3, 7, NULL, NULL, '2019-7-11', 30, 'H/W Troubleshoot', NULL, NULL, NULL, 1, 11, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 4, 3, 3, 8, NULL, NULL, '2019-7-11', 30, 'Lost Documents', NULL, NULL, NULL, 2, 11, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 2, 1, 2, 9, NULL, NULL, '2019-7-18', 60, 'nothing works', NULL, NULL, NULL, NULL, 12, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 6, 4, 2, 10, NULL, NULL, '2019-7-18', 60, 'computer too slow', NULL, NULL, NULL, NULL, 12, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 2, 1, 2, 1, NULL, NULL, '2019-7-18', 60, 'Printer giving headache', NULL, NULL, NULL, NULL, 12, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 1, 1, 1, 2, NULL, NULL, '2019-7-25', 15, 'computer will not start', NULL, NULL, NULL, NULL, 13, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 6, 4, 1, 3, NULL, NULL, '2019-7-25', 15, 'phone won\'t connect', NULL, NULL, NULL, NULL, 13, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 1, 1, 1, 4, NULL, NULL, '2019-7-25', 15, 'monitor not turning on', NULL, NULL, NULL, NULL, 13, 1);
+
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 1, 1, 2, 5, NULL, NULL, '2019-6-30', 15, 'broken keyboard', NULL, NULL, NULL, NULL, 11, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 2, 1, 2, 6, NULL, NULL, '2019-6-30', 15, 'need new computer', NULL, NULL, NULL, NULL, 11, 1);
+INSERT INTO job (JobID, CompanyID, ClientID, StatusID, JobCategoryID, StartDate, Duration, PreferredEndDate, EstimatedDuration, Description, Feedback, LoggedKm, JobRating, ContractorID, CoordinatorID, Active) 
+VALUES (NULL, 3, 2, 2, 7, NULL, NULL, '2019-6-30', 15, 'need server maintenance', NULL, NULL, NULL, NULL, 11, 1);
+
+-- JobRejection --
+INSERT INTO jobrejection (JobRejectionID, JobID, ContractorID) VALUES (NULL, 2, 5);
+INSERT INTO jobrejection (JobRejectionID, JobID, ContractorID) VALUES (NULL, 3, 3);
+
+-- ContractorAvailability --
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 1, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 1, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 1, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 1, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 1, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 2, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 2, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 2, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 2, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 2, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 3, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 3, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 3, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 3, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 3, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 4, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 4, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 4, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 4, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 4, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 5, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 5, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 5, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 5, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 5, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 6, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 6, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 6, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 6, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 6, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 7, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 7, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 7, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 7, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 7, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 8, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 8, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 8, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 8, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 8, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 9, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 9, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 9, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 9, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 9, 1);
+
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-25', '12:00:00', 6, 10, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-26', '12:00:00', 6, 10, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-27', '12:00:00', 6, 10, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-06-28', '12:00:00', 6, 10, 1);
+INSERT INTO contractoravailability (ContractorAvailabilityID, Date, StartTime, Hours, ContractorID, Active) VALUE (NULL, '2019-07-02', '12:00:00', 6, 10, 1);
+
+DELIMITER ;;
+CREATE PROCEDURE usp_Cloud_ClientGetJobs(in clientID INT)
+BEGIN
+    select job.StartDate, job.JobID, staff.FirstName, staff.LastName, job.description, jobcategory.Description, status.Description As Status
+	from job
+    left join staff on job.ContractorID = staff.StaffID
+    inner join jobcategory on job.JobCategoryID = jobcategory.JobCategoryID
+    inner join status on job.StatusID = status.StatusID
+    where job.ClientID = clientID
+    and job.Active = 1
+    order by job.StartDate;
+END;;
+
+CREATE PROCEDURE usp_Cloud_ContractorAssignRequest(in conID INT)
+BEGIN
+    select job.JobID, job.PreferredEndDate, client.FirstName, client.LastName, client.Phone, company.Name, company.Branch, company.Street, company.Suburb, company.State, company.Postcode, job.description, jobcategory.Description
+    from job, company, jobcategory, client
+    where job.CompanyID = company.CompanyID
+    and job.JobCategoryID = jobcategory.JobCategoryID
+    and job.ContractorID = conID
+    and job.StatusID = 3
+    and job.ClientID = client.ClientID;
+END;;
+
+CREATE PROCEDURE usp_Cloud_ContractorGetJobs(in conID INT)
+BEGIN
+    select job.StartDate, job.JobID, client.FirstName, client.LastName, client.Phone, company.Name, company.Branch, company.Street, company.Suburb, company.State, company.Postcode, job.description as jobdesc, jobcategory.Description as jobcatdesc, status.Description as statusdesc, job.duration, job.loggedkm, job.StatusID, job.PreferredEndDate
+    from job, company, client, jobcategory, status
+    where job.CompanyID = company.CompanyID
+    and job.ClientID = client.ClientID
+    and job.JobCategoryID = jobcategory.JobCategoryID
+    and job.ContractorID = conID
+    and job.StatusID in (4, 5, 6, 7, 8)
+    and status.StatusID = job.StatusID
+    and job.Active = 1;
+END;;
+
+CREATE PROCEDURE usp_Cloud_CoordinatorGetAssignments(in coorID INT)
+BEGIN
+    Select Job.JobID, job.ClientID, job.CompanyID, company.Branch, company.Name, job.Description, job.PreferredEndDate, job.EstimatedDuration, job.JobCategoryID, company.locationid
+    from job, company
+    Where Job.CompanyID = company.CompanyID
+    and job.Statusid = 2
+    AND job.coordinatorID = coorID;
+END;;
+
+CREATE PROCEDURE usp_Cloud_CoordinatorJobStatus(in coorID INT)
+BEGIN
+    Select job.JobID, job.ClientID, job.CompanyID, company.Name, company.Branch, job.StartDate, job.ContractorID, staff.FirstName, staff.LastName, job.LoggedKm, job.Duration, status.Description
+    From job, company, staff, status
+    where job.CompanyID = company.CompanyID
+    and job.ContractorID = staff.StaffID
+    and job.CoordinatorID = coorID
+    and job.StatusID = status.StatusID;
+END;;
+
+CREATE PROCEDURE usp_Cloud_ClientAddJob(in ClientID INT, in CompanyID INT, in JobCategoryID INT, in `Desc` VARCHAR(50), in DueDate DATE)
+BEGIN
+    INSERT INTO Job (JobID, ClientID, CompanyID, StatusID, JobCategoryID, PreferredEndDate, `Description`, Active) 
+    VALUES (NULL, ClientID, CompanyID, 1, JobCategoryID, DueDate, `Desc`, 1);
+END;;
+
+CREATE PROCEDURE usp_Cloud_ContractorReject(in jobid int, in conid int) 
+BEGIN
+
+UPDATE job SET job.ContractorID = null, job.StatusID = 2 WHERE job.jobid = jobid;
+INSERT INTO jobrejection(jobid, contractorid) VALUES(jobid, conid);
+
+END;;
+
+CREATE PROCEDURE usp_Cloud_ContractorAccept(in jobid int) 
+BEGIN
+
+UPDATE job SET job.StatusID = 4 WHERE job.jobid = jobid;
+
+END;;
+
+
+
+-- get contractor based on location and skill --
+
+drop PROCEDURE if exists usp_GetContractors;;
+create procedure usp_GetContractors(in jobcatid int, in locid int)
+begin
+select 			c.contractorid,
+				s.firstname,
+                s.lastname,
+				cs.jobcategoryid, 
+                jc.description as jobcat,
+            	cl.locationid, 
+                l.description as loc,
+            	AVG(j.jobrating) as AverageRating
+			
+                
+from 			contractor as c
+				inner join contractorskill as cs on c.ContractorID = cs.ContractorID
+				inner join contractorlocation as cl on c.ContractorID = cl.ContractorID
+				inner join job as j on c.ContractorID = j.ContractorID
+                inner join staff as s on s.StaffID = c.ContractorID
+                inner join location as l on l.LocationID = cl.LocationID
+                inner join jobcategory as jc on jc.JobCategoryID = cs.JobCategoryID
+where 			c.active = 1
+and 			cs.jobcategoryid = jobcatid
+and 			cl.locationid = locid
+Group by 		c.ContractorID
+order by 		AverageRating DESC;
+
+end;;
+
+-- get totalhours --
+
+drop PROCEDURE if exists usp_GetContractorsHours;;
+create procedure usp_GetContractorsHours(in estimatedduration int, in duedate date)
+begin
+select c.contractorid, sum(ca.Hours) as TotalHours
+from contractor as c
+inner join contractoravailability as ca on c.ContractorID = ca.ContractorID
+where ca.Date BETWEEN now() and duedate
+group by ContractorID
+HAVING TotalHours >= estimatedduration;
+
+end;;
+
+
+-- get totaljobs
+
+drop PROCEDURE if exists usp_GetContractorsTotalJobs;;
+create procedure usp_GetContractorsTotalJobs()
+begin
+
+select distinct j.contractorid, count(*) as totalJobs
+from job as j
+where j.active = 1
+and j.statusid between 3 and 5
+and j.contractorid is not null
+group by contractorid
+having totalJobs < 2;
+
+
+
+end;;
+
+-- get jobrejection
+
+drop PROCEDURE if exists usp_GetRejections;;
+create procedure usp_GetRejections(in conid int, in jobid int)
+begin
+
+select j.contractorid, j.jobid 
+from jobrejection as j
+where		j.contractorid = conid
+and		j.jobid = jobid;
+
+
+end;;
+
+
+
+CREATE TRIGGER before_staff_update 
+    BEFORE UPDATE ON staff
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO staff_log
+    SET action = 'UPD',
+    	ChangeDate = NOW(),
+    	StaffID = OLD.StaffID,
+        FirstName = OLD.FirstName,
+        LastName = OLD.LastName,
+        Street = OLD.Street,
+        Suburb = OLD.Suburb,
+        State = OLD.State,
+        Postcode = OLD.Postcode,
+        Email = OLD.Email,
+        Phone = OLD.Phone,
+        AccName = OLD.AccName,
+        AccBSB = OLD.AccBSB,
+        AccNumber = OLD.AccNumber,
+        Gender = OLD.Gender,
+	Active = OLD.Active;
+END;;
+
+CREATE TRIGGER after_staff_add
+    AFTER INSERT ON staff
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO staff_log
+    SET action = 'INS',
+    	ChangeDate = NOW(),
+    	StaffID = NEW.StaffID,
+        FirstName = NEW.FirstName,
+        LastName = NEW.LastName,
+        Street = NEW.Street,
+        Suburb = NEW.Suburb,
+        State = NEW.State,
+        Postcode = NEW.Postcode,
+        Email = NEW.Email,
+        Phone = NEW.Phone,
+        AccName = NEW.AccName,
+        AccBSB = NEW.AccBSB,
+        AccNumber = NEW.AccNumber,
+        Gender = NEW.Gender,
+        Active = NEW.Active;
+END;;
+
+
+CREATE TRIGGER before_job_update 
+    BEFORE UPDATE ON job
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO job_log
+    SET action = 'UPD',
+    	ChangeDate = NOW(),
+    	JobID = OLD.JobID,
+        CompanyID = OLD.CompanyID,
+        ClientID = OLD.ClientID,
+        StatusID = OLD.StatusID,
+        JobCategoryID = OLD.JobCategoryID,
+        StartDate = OLD.StartDate,
+        Duration = OLD.Duration,
+        PreferredEndDate = OLD.PreferredEndDate,
+        EstimatedDuration = OLD.EstimatedDuration,
+        Description = OLD.Description,
+        Feedback = OLD.Feedback,
+        LoggedKm = OLD.LoggedKm,
+        JobRating = OLD.JobRating,
+        ContractorID = OLD.ContractorID,
+        CoordinatorID = OLD.CoordinatorID,
+	Active = OLD.Active;
+END;;
+
+CREATE TRIGGER after_job_insert
+    AFTER INSERT ON job
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO job_log
+    SET action = 'INS',
+    	ChangeDate = NOW(),
+    	JobID = NEW.JobID,
+        CompanyID = NEW.CompanyID,
+        ClientID = NEW.ClientID,
+        StatusID = NEW.StatusID,
+        JobCategoryID = NEW.JobCategoryID,
+        StartDate = NEW.StartDate,
+        Duration = NEW.Duration,
+        PreferredEndDate = NEW.PreferredEndDate,
+        EstimatedDuration = NEW.EstimatedDuration,
+        Description = NEW.Description,
+        Feedback = NEW.Feedback,
+        LoggedKm = NEW.LoggedKm,
+        JobRating = NEW.JobRating,
+        ContractorID = NEW.ContractorID,
+        CoordinatorID = NEW.CoordinatorID,  
+        Active = NEW.Active;
+END;;
+
+
+CREATE TRIGGER before_client_update 
+    BEFORE UPDATE ON client
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO client_log
+    SET action = 'UPD',
+    	ChangeDate = NOW(),
+    	ClientID = OLD.ClientID,
+        FirstName = OLD.FirstName,
+        LastName = OLD.LastName,
+        Phone = OLD.Phone,
+        Email = OLD.Email,
+        Gender = OLD.Gender,
+	Active = OLD.Active;
+END;;
+
+CREATE TRIGGER after_client_insert
+    AFTER INSERT ON client
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO client_log
+    SET action = 'INS',
+    	ChangeDate = NOW(),
+    	ClientID = NEW.ClientID,
+        FirstName = NEW.FirstName,
+        LastName = NEW.LastName,
+        Phone = NEW.Phone,
+        Email = NEW.Email,
+        Gender = NEW.Gender,
+        Active = NEW.Active;
+END;;
+
+
+CREATE TRIGGER before_company_update 
+    BEFORE UPDATE ON company
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO company_log
+    SET action = 'UPD',
+    	ChangeDate = NOW(),
+    	CompanyID = OLD.CompanyID,
+        Name = OLD.Name,
+        Street = OLD.Street,
+        Suburb = OLD.Suburb,
+        State = OLD.State,
+        Postcode = OLD.Postcode,
+        Branch = OLD.Branch,
+        Description = OLD.Description,
+        ClientID = OLD.ClientID,
+        LocationID = OLD.LocationID,
+	Active = OLD.Active;
+END;;
+
+CREATE TRIGGER after_company_insert
+    AFTER INSERT ON company
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO company_log
+    SET action = 'INS',
+    	ChangeDate = NOW(),
+    	CompanyID = NEW.CompanyID,
+        Name = NEW.Name,
+        Street = NEW.Street,
+        Suburb = NEW.Suburb,
+        State = NEW.State,
+        Postcode = NEW.Postcode,
+        Branch = NEW.Branch,
+        Description = NEW.Description,
+        ClientID = NEW.ClientID,
+        LocationID = NEW.LocationID,
+        Active = NEW.Active;
+END;;
+
+
+
+
+DELIMITER ;

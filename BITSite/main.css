@@ -1,0 +1,418 @@
+
+.orange-fore {color: #f47840;}
+.blue-fore {color: #4b7885;}
+.grey-fore { color: #EBEEF2;}
+.orange-bg {background: #f47840;}
+.blue-bg {background: #4b7885;}
+.grey-bg {background: #EBEEF2}
+.blue-border {border: 2px solid #4b7885;}
+
+.header{
+    box-shadow: 0px 1px 10px #888888;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    height: 72px;
+    width: 100%;
+}
+
+.login{
+    float: right;
+    margin: 15px 10px 0 0;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px lightgray;
+    cursor: pointer;
+    position: fixed;
+    z-index: 12;
+    top: 0;
+    width: 180px;
+}
+
+.loginPositionContainer {
+    float: right;
+    min-width: 100px;
+    margin-right: 10px;
+}
+
+.login:focus
+{
+    opacity: 0.5;
+    border: none;
+}
+.login:hover {
+    opacity: 0.5;
+}
+
+.modal-header {
+    background-color: #f47840;
+    color: white;
+}
+
+.modal-title {
+    font-size: 24pt;
+}
+
+#formWrapper {
+    width: 350px;
+    height: 280px;
+    padding: 15px;
+    display: block;
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    top: 4px;
+    /*right: -70px;*/
+    border: 2px solid #888888;
+    background-color: rgb(235, 238, 242);
+    box-shadow: 0.5px 0.5px 5px #888888;
+    z-index: 11;
+    
+}
+
+.logo:focus
+{
+    opacity: 0.5;
+    border: none;
+}
+.logo:hover {
+    opacity: 0.5;
+}
+
+
+form label, input {
+    font-family: 'century gothic', 'arial', 'sans-serif';
+    font-size: 10pt;
+}
+
+form input {
+    font-weight: lighter;
+}
+
+.loginBoxes {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid lightgray;
+    box-sizing: border-box;
+}
+
+.loginButton {
+    background-color: #4b7885;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.loginButton:hover {
+    opacity: 0.8;
+}
+
+body {
+    min-height: 700px;
+}
+
+.mainSection {
+    min-height: 600px;
+    margin-top: 70px;
+    font-family: 'arial', 'century gothic', 'sans-serif';
+    font-size: 12px;
+    /*padding: 20px 20px;*/
+}
+
+footer {
+    width: 100%;
+    background-color:  rgb(241, 131, 80);
+    color: white;
+    font-family: 'century gothic', 'arial', 'sans-serif';
+    font-size: 12px;
+    padding: 2px 0;
+}
+
+#footerWrapper {
+    padding-top: 20px;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+/* ---------------------------------------------HOMEPAGE---------------------------------------- */
+
+#bigLogoSec {
+    width: 100%;
+    background-color: #f0f0f0;
+}
+
+#bigLogo {
+    /* width: 70%; */
+    margin: auto;
+    display: block;
+    padding: 150px;
+}
+
+.fourPeopleImage {
+    width: 100%;
+    display: block;
+
+}
+
+#ourServicesSec {
+    padding: 20px;
+    background-color: white;
+    padding-top: 100px;
+}
+
+#homepageBoxContainer {
+    width: 100%;
+    overflow: auto;
+    background-color: white;
+}
+
+#homepageBoxWrapper {
+    width: 80%;
+    margin: auto;
+    display: flex;
+}
+
+#homepageBox1 {
+    width: 24.25%;
+    min-height: 250px;
+    margin-right: 1%;
+    margin-bottom: 10px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px;
+    flex: 1;
+}
+
+#homepageBox2 {
+    width: 24.25%;
+    min-height: 250px;
+    margin-right: 1%;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px;
+    flex: 1;
+}
+
+#homepageBox3 {
+    width: 24.25%;
+    min-height: 250px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-right: 1%;
+    flex: 1;
+}
+
+#homepageBox4 {
+    width: 24.25%;
+    min-height: 250px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px;
+    flex: 1;
+}
+
+#andMore {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20pt;
+    color: #4b7885;
+    padding-bottom: 50px;
+}
+
+.indexHeading {
+    font-size: 20px;
+    padding: 5px;
+    color: gray;
+    flex: 1;
+    margin: 0;
+}
+
+.indexText {
+    padding: 10px;
+    text-align: left;
+    opacity: 0.6;
+    font-size: 12px;
+    flex: 1;
+    color: gray;
+}
+
+.ourServicesH1 {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 60pt;
+    color: #4b7885;
+    padding-bottom: 50px;
+}
+#homePageContact {
+    width: 80%;
+    margin: auto;
+}
+
+#homePageContact h1 {
+     font-size: 70pt;
+     font-weight: bold;
+     color: #4b7885;
+     padding: 300px 0 0 0;
+     text-align: center;
+ }
+
+#homePageContact h2 {
+    font-size: 20pt;
+    font-weight: bold;
+    color: lightgray;
+    padding-bottom: 300px;
+    text-align: center;
+}
+
+/* ---------------------------------------------After Login-------------------------------------------------- */
+.infoCardWrapper {
+    width: 90%;
+    margin: auto;
+    overflow: auto;
+    height: auto;
+}
+
+.profilePositionContainer {
+    float: right;
+    min-width: 400px;
+    margin-right: 10px;
+}
+
+.profile{
+    color: rgb(244, 120, 64);
+    display: inline-block;
+    text-align: right;
+    /* float: right; */
+    margin: 15px 10px 0 0;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px lightgray;
+    position: fixed;
+    z-index: 12;
+    top: 0;
+    right: 0;
+}
+
+.informationCard {
+    width: 98%;
+    background-color: rgb(235, 238, 242);
+    margin: 30px auto;
+    display: block;
+    border: 2px rgb(197, 199, 202) solid;
+    box-sizing: border-box;
+}
+
+.informationCardHeader {
+    width: 100%;
+    height: 60px;
+    background-color: #f47840;
+    color: white;
+    text-align: left;
+    border-bottom: #dd6c38 2px solid;
+    box-sizing: border-box;
+}
+
+.informationCardH1 {
+    font-size: 30pt;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 0px;
+
+}
+
+.tableFormat {
+    max-height: 1000px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin: 10px 0px;
+    display: block;
+}
+
+.tableHeader{
+    background-color: #4b7885;
+    color:white;
+    height: 38px;
+}
+
+.tableFormat th {
+    border: #355861 2px solid;
+    padding: 10px;
+}
+
+.tableFormat td {
+    padding: 5px;
+    border: rgb(197, 199, 202) 2px solid;
+}
+
+.jobRequestForm {
+    font-size: 12pt;
+    overflow: auto;
+}
+
+.jobRequestLabel {
+    margin: 10px 20px 10px 10px;
+    width: 100%;
+}
+
+#jobRequestForm select, input {
+    width: 80%;
+}
+
+.jobRequestFormDesc {
+    width: 100%;
+    height: 100px;
+    overflow:auto;
+}
+
+.jobRequestFormDescLabel {
+    margin: 0px;
+    width: 98%;
+}
+
+#jobRequestCol1 {
+    width: 20%;
+    float: left;
+}
+
+#jobRequestCol2 {
+    width: 79%;
+    float: left;
+}
+
+.jobRequestSubmit {
+    float: right;
+    margin: 0 18px 10px 0;
+}
+
+tbody {
+    display: table;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sneak {
+    opacity: 0;
+}
+
+.fadein {
+    opacity: 0;
+}
